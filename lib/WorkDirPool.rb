@@ -100,7 +100,12 @@ class WorkDirPool
     for name in ["build", "progress", "run", "checksum" ] do
       begin
 	filename = "#{work_dir}/log/#{name}.log"
-	File.unlink(filename) if File.exist?(filename)
+	begin
+          File.unlink(filename) if File.exist?(filename)
+        rescue Exception
+          sleep 1
+          retry
+        end
       end
     end
   end
