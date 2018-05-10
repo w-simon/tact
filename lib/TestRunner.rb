@@ -268,7 +268,14 @@ class TestRunner
    
     #write everything needed to file to execute on test board
     file = File.new("#{@work_dir}/board_run", 'w', 0744)
-  
+    begin
+      file = File.new("#{@work_dir}/board_run", 'w', 0744)
+    rescue Exception
+      puts "[DEBUG] create file failed! file:{@work_dir}/board_run."
+      sleep 1
+      retry
+    end
+ 
     file.puts("#!/bin/bash")
     file.puts("echo -n '=== Start (test board time): '; date")
     if @timeout > 0
