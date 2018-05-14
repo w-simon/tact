@@ -77,7 +77,9 @@ class Entity
   end
 
   def mutate(rate)
-    @options.each{ |option| if rand() < rate then option.mutate end}
+    if option != nil then
+        @options.each{ |option| if rand() < rate then option.mutate end}
+    end
   end
 	
   def init
