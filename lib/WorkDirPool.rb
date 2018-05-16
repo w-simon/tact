@@ -121,7 +121,12 @@ class WorkDirPool
 	CriticalSection.enter
 
 	lock = work_dir + '/in_use'
-	File.unlink(lock) if File.exist?(lock)
+	begin
+	  File.unlink(lock) if File.exist?(lock)
+        rescue Exception
+          sleep 0.1
+          retry
+	end
       ensure
 	CriticalSection.leave
       end
