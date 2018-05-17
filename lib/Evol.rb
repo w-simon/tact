@@ -697,7 +697,8 @@ class ParetoPopulationJoint < ParetoPopulation
     @archive_size = conf.static_params[:archive_size] 
     @tuning_process = false
     @greater_is_better = conf.runtime_params[:greater_is_better]
-    @basepath = conf.static_params[:basepath] 
+    @basepath = conf.static_params[:basepath]
+    @measure = conf.runtime_params[:measure]
   end
 end				
 
