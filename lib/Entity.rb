@@ -99,7 +99,13 @@ class Entity
   def <=>(other)
     #pre = compare(@fitness,other.fitness)
     #return pre if pre != nil
-    @fitness <=> other.fitness
+    #@fitness <=> other.fitness
+    c = nil
+    c = 0 if self == nil && other == nil
+    c = 1 if other == nil && c == nil
+    c = -1 if self == nil && c == nil
+    c = @fitness <=> other.fitness
+    c
   end
 end
 
