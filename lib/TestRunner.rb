@@ -267,12 +267,11 @@ class TestRunner
     end
    
     #write everything needed to file to execute on test board
-    file = File.new("#{@work_dir}/board_run", 'w', 0744)
     begin
       file = File.new("#{@work_dir}/board_run", 'w', 0744)
     rescue Exception
       puts "[DEBUG] create file failed! file:{@work_dir}/board_run."
-      sleep 1
+      sleep 0.2
       retry
     end
  
@@ -295,6 +294,7 @@ class TestRunner
     file.puts("sh -c #{ENV["TEST_DIR"]}/bin/target-run-test ; c=$? ; echo END_RUN ; if [ $c == 0 ] ; then echo OVERALL_STATUS=OK ; else echo OVERALL_STATUS=ERROR ; fi")
     file.puts("echo -n '=== Finish (test board time): ' &&  date")
     file.puts("pgid=`ps -ejH | grep -m 1 $pid | awk '{ print $2 }'` && (flock 105 ; kill -9 -$pgid) 105>1.lock") if @timeout > 0
+    file.flush
     file.close
 
     if @pgo_session
