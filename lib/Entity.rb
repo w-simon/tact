@@ -33,7 +33,7 @@ class Entity
       if reducing
         @options.each{ |instance|
            (" " + string.split(" ").join(" ")).split(" -").each{ |option|
-            if instance.init_from_string("-" + option)
+            if instance.init_from_string("-" + option + " ")
               instance.exists = true
               break
             end
