@@ -399,11 +399,14 @@ class TestRunner
   
   # Write to results collection
   def write_results_log(val, compile_options, generation_num, population_num)
-    CriticalSection.enter
+    begin
+      CriticalSection.enter
       results_log=File.new("#{@test_dir}/log/current/results.log", "a")
       results_log.puts("#{val}\t#{generation_num}\t#{population_num}\t'#{@compile_options}'")
       results_log.close
-    CriticalSection.leave
+    ensure
+      CriticalSection.leave
+    end
   end
 
   ###########################################################
