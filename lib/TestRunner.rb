@@ -5,6 +5,14 @@
 
 # Custom handler is needed for ruby to pass SIGINT into process executed with system()
 Signal.trap("INT") do
+    thread_count = 0
+    Thread.list.each do |t|
+      thread_count += 1
+      err_msg = "[DEBUG] thread #{thread_count} of total #{Thread.list.size} backtrace:\n"
+      err_msg += t.backtrace.join("\n")
+      err_msg += "\n\n"
+      puts(err_msg)
+    end
   raise Interrupt, "SIGINT catched"
 end
 
