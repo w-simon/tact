@@ -766,12 +766,11 @@ EOF
 		    end
 		  end
                 }
-	      }
-  
-              inner_threads.each { |aThread|
-                aThread.join
-              }
 
+                inner_threads.each { |aThread|
+                aThread.join
+                }
+              }
             }
           }
           threads.each{|aThread|
