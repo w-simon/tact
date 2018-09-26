@@ -283,7 +283,7 @@ class TestRunner
       retry
     end
  
-    file.puts("#!/bin/bash")
+    file.puts("#!/bin/sh")
     file.puts("echo -n '=== Start (test board time): '; date")
     if @timeout > 0
       file.puts("current_pid=$$")
