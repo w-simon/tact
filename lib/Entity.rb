@@ -77,7 +77,7 @@ class Entity
   end
 
   def mutate(rate)
-    @options.each{ |option| if rand() < rate && option != nil then option.mutate end}
+    @options.each{ |option| if rand() < rate && !option.nil? then option.mutate end}
   end
 	
   def init
@@ -97,12 +97,11 @@ class Entity
   def <=>(other)
     #pre = compare(@fitness,other.fitness)
     #return pre if pre != nil
-    #@fitness <=> other.fitness
     c = nil
     c = 0 if self == nil && other == nil
     c = 1 if other == nil && c == nil
     c = -1 if self == nil && c == nil
-    c = @fitness <=> other.fitness
+    c = @fitness <=> other.fitness if c == nil
     c
   end
 end

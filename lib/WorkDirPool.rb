@@ -48,10 +48,10 @@ def initialize
 @lock_file = nil
 end
 def CriticalSection.enter
-    $mutex.synchronize do
-if !defined?(@lock_file) or !@lock_file then @lock_file = File.open(__FILE__) end
-    end
-@lock_file.flock(File::LOCK_EX)
+  $mutex.synchronize do
+    if !defined?(@lock_file) or !@lock_file then @lock_file = File.open(__FILE__) end
+  end
+  @lock_file.flock(File::LOCK_EX)
 end
 
 def CriticalSection.leave
